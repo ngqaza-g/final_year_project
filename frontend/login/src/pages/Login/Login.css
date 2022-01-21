@@ -1,0 +1,36 @@
+.body{
+    position: relative;
+}
+
+.login-container{
+    max-width: 500px;
+    min-width: 300px;
+    margin : auto;
+}
+
+.login-container h2, .login-container h3{
+    text-align : center;
+}
+
+.icon{
+    display: flex;
+    justify-content: center;
+}
+
+.icon img{
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.login-btn{
+    width: 100%;
+}
+
+.footer{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    bottom: 0;
+}
