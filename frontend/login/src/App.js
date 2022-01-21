@@ -32,7 +32,7 @@ const App = ()=>{
                     setUser(user);
                 }).catch(()=> console.log("An error occured"))
             }
-        }, []);
+        });
 
     const authenticate = (credentials)=>{
         fetch('http://localhost:5000/login', {
