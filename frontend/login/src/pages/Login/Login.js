@@ -36,7 +36,7 @@ const Login = ({ authenticate })=>{
         <div>
         <div className="container login-container">
         <div className="header mt-5">
-            <h2 className="text-primary">Mthwakazi General Hospital</h2>
+            <h2 className="text-primary">Bulawayo General Hospital</h2>
             <h3>Enter your credentials to log in</h3>
             <div className="icon">
                 <img src={logo} alt="logo"/>

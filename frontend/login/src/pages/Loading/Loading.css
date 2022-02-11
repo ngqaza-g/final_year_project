@@ -13,7 +13,7 @@
     height: 150px;
 
     border: 16px solid #ccc;
-    border-top: 16px solid blue;
+    border-top: 16px solid #0275d8;
     border-radius: 50%;
 
     animation: 1s spin linear infinite;
