@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
 import './App.css';
+import Loading from './pages/Loading/Loading';
 
 const App = ()=>{
     const cookie = new Cookies(); 
     const [login_token, setLoginToken] = useState(undefined);
     const [user, setUser] = useState(undefined);
+
+    const navigate = useNavigate();
 
     useEffect(()=>{
         //    console.log((cookie.get('login_token') === undefined));
@@ -35,6 +38,7 @@ const App = ()=>{
         });
 
     const authenticate = (credentials)=>{
+        
         fetch('http://localhost:5000/login', {
             headers:{
                 "Content-Type" : "application/json"
@@ -56,15 +60,23 @@ const App = ()=>{
         cookie.remove('login_token');
         setLoginToken(undefined);
         setUser(undefined);
+        navigate('/');
     }
 
     return(
         <Routes>
-            {!login_token && <Route path="/" element={<Login authenticate = {authenticate} />} />}
+            {!login_token && (
+                <>
+                    <Route path="/" element={<Login authenticate = {authenticate} />} />
+                    <Route path="/loading" element={<Loading />} />
+                </>
+            )}
+                    
 
             {login_token && (
                 <>
                     <Route path="/dashboard" element={<Dashboard user = {user} logout = {logout}/>} />
+                    <Route path="/loading" element={<Loading />} />
                 </>
             )
             }

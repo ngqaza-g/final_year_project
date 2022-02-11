@@ -27,8 +27,8 @@ const Login = ({ authenticate })=>{
             }
         })
     }
-
     const onClick = ()=>{
+        navigate('/loading');
         authenticate(credentials);
         navigate('/dashboard');
     }
