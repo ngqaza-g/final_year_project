@@ -10,8 +10,8 @@ export default function Navbar({logout}){
         </button>
         <ul className="navbar-nav px-3">
           <li className="nav-item text-nowrap">
-            {/* <a onClick={logout}className="nav-link" href="#">Sign out</a> */}
-            <input className="nav-link" onClick={logout} type="button" value="Signout"/>
+            {/* <a className="nav-link" href="#">Sign out</a> */}
+            {/* <input className="nav-link" onClick={logout} type="button" value="Signout"/> */}
           </li>
         </ul>
     </nav>

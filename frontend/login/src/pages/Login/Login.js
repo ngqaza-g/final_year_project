@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import './Login.css';
 import logo from './logo.png';
 
@@ -9,7 +9,7 @@ const Login = ({ authenticate })=>{
         password : ""
     });
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const onChange = (event)=>{
         const {name, value} = event.target;
@@ -28,9 +28,7 @@ const Login = ({ authenticate })=>{
         })
     }
     const onClick = ()=>{
-        navigate('/loading');
-        authenticate(credentials);
-        navigate('/dashboard');
+        authenticate(credentials, '/dashboard');
     }
     return (
         <div>
@@ -44,12 +42,12 @@ const Login = ({ authenticate })=>{
             <div className="form">
                     <div className="form-group">
                         <label for="username">Username</label>
-                        <input onChange={onChange} className="form-control" type="text" id="username" name="username" placeholder="Username.." />
+                        <input required onChange={onChange} className="form-control" type="text" id="username" name="username" placeholder="Username.." />
                     </div>
     
                     <div className="form-group">
                         <label for="password">Password</label>
-                        <input onChange={onChange} className="form-control" type="password" id="password" name="password" placeholder="Password.." />
+                        <input required onChange={onChange} className="form-control" type="password" id="password" name="password" placeholder="Password.." />
                     </div>
                     <input onClick={onClick} className="login-btn btn btn-primary mt-2" type="button" name="login" value="Login"/>
             </div>
