@@ -3,48 +3,56 @@ import React from "react";
 export default function Sidenav({user}){
 
     return (
-      <div className="container-fluid">
-      <div className="row">
-        <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    //           <!-- Side Navbar -->
+    //     <!-- 
+    //     Dashboard
+    //     Admit patient
+    //     Patients Info
+    //     Duty Table
+    //     Global Settings
+    //  -->
 
-          <div className="sidebar-sticky pt-3">
-            <ul className="nav flex-column">
+     <div className="bg-dark d-flex flex-column text-white col-md-3 col-lg-2 d-none d-md-block h-100 sidebar">
 
-              <li className="nav-item">
-                <a className="nav-link active" href="#">
-                  <span data-feather="home"></span>
-                  CMS<span className="sr-only">(current)</span>
-                </a>
-              </li>
+        <div className="container-fluid">
+            <ul className="nav nav-pills flex-column mt-4">
+                <li className="nav-item">
+                    <a href="#" className="nav-link active text-white trancate">
+                        <i className="bi bi-heart-pulse-fill me-2"></i>
+                        Dashboard
+                    </a>
+                </li>
 
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  <span></span>
-                  Admit Patient
-                </a>
-              </li>
+                <li className="nav-item">
+                    <a href="#" className="nav-link text-white trancate">
+                        <i className="bi bi-hospital-fill me-2"></i>
+                        Admit Patient
+                    </a>
+                </li>
 
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  <span></span>
-                  Admit Patient
-                </a>
-              </li>
+                <li className="nav-item">
+                    <a href="#" className="nav-link text-white trancate">
+                        <i className="bi bi-file-medical-fill me-2"></i>
+                        Patients Info
+                    </a>
+                </li>
 
+                <li className="nav-item">
+                    <a href="#" className="nav-link text-white trancate">
+                        <i className="bi bi-table me-2"></i>
+                        Duty Table
+                    </a>
+                </li>
+
+                <li className="nav-item">
+                    <a href="#" className="nav-link text-white trancate">
+                    <i className="bi bi-gear-fill me-2"></i>
+                        Global Settings
+                    </a>
+                </li>
             </ul>
-          </div>
-
-        </nav>
-
-
-
-{/* 
-        <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h3>Welcome {user.name}</h3>
-            </div>
-        </main> */}
-      </div>
-    </div>
+        </div>
+     </div>
+    //  <!-- End of Sidenav -->
     );
 }

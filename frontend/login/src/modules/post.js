@@ -1,5 +1,5 @@
 async function post(url, data){
-    const responce = await fetch(url, {
+    const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
@@ -7,7 +7,7 @@ async function post(url, data){
         body: JSON.stringify(data)
     });
 
-    return Response.json()
+    return response
 }
 
 export default post
