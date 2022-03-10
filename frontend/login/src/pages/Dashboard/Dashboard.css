@@ -1,0 +1,32 @@
+html, body, #root{
+    height: 100%;
+}
+
+.dropdown-toggle::after{
+    display: none;
+    content: "";
+}
+
+.username::after{
+    display: inline;
+    content: "";
+    margin-left: 10px;
+}
+
+
+.sidebar, footer{
+    border-top: 1px solid #bbb;
+}
+
+.trancate{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+footer{
+    z-index: 1;
+}
+.monitor{
+    height: 250px;
+}
