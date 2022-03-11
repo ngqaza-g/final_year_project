@@ -3,8 +3,13 @@ import { useNavigate } from "react-router";
 import Cookies from 'universal-cookie';
 import './Login.css';
 import logo from './logo.png';
+import Loading from '../Loading/Loading';
 
 const Login = ({ setLoginToken, setUser })=>{
+
+    const [loading, setLoading] = useState(false);
+
+    const [bunner, setBunner] = useState({state: false, msg: ""});
 
     const [credentials, setCredentials] = useState({
         username : "",
@@ -31,68 +36,108 @@ const Login = ({ setLoginToken, setUser })=>{
         })
     }
 
-    const authenticate = (credentials, destination)=>{
-        navigate('/loading')
-        fetch('http://localhost:5000/login', {
-            headers:{
-                "Content-Type" : "application/json"
-            },
-            method : "POST",
-            body : JSON.stringify(credentials)
-        })
-        .then(res => {
-            if(res.status === 200){
-                return res.json();
-            }else{
-                navigate('/');
-            }
-            })
-        .then(data => {
-            if(data){
-                const {login_token, user} = data;
-                if(login_token){
-                    cookie.set('login_token', login_token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 5))});
-                    setLoginToken(login_token);
-                    setUser(user);
-                    navigate(destination);
-                }
+    const displayMessage = (msg)=>{
+        setBunner(prev=>{
+            return {
+                state : true,
+                msg : msg
             }
         });
+        setTimeout(()=>{
+
+            setBunner(prev=>{
+                return {
+                    state : false,
+                    masg: ""
+                }
+            })
+        },5000);
     }
 
-    const onClick = ()=>{
+    const authenticate = async (credentials, destination)=>{
+        try{
+            setLoading(true);
+            const response = await fetch('http://localhost:5000/login', {
+                 headers:{
+                     "Content-Type" : "application/json"
+                 },
+                 method : "POST",
+                 body : JSON.stringify(credentials)
+             });
+     
+             if(response.status == 200){
+                 const data = await response.json();
+                 if(data){
+                     const {login_token, user} = data;
+                     if(login_token){
+                         cookie.set('login_token', login_token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 5))});
+                         setLoginToken(login_token);
+                         setUser(user);
+                         navigate(destination);
+                     }
+                 }
+             }else{
+                 try{
+                     const data = await response.json();
+                     console.log(data);
+                     setLoading(false);
+                     displayMessage(data.msg);
+                 }catch(error){
+                     setLoading(false);
+                     displayMessage("An Error Ocuured");
+                 }
+            }
+        }catch(error){
+            setLoading(false);
+            displayMessage("An Error Occured Connecting to the server");
+        }
+
+    }
+
+
+
+    const onSubmit = (e)=>{
+        e.preventDefault();
         authenticate(credentials, '/dashboard');
     }
-    return (
-        <div>
-        <div className="container login-container">
-        <div className="header mt-5">
-            <h2 className="text-primary">Bulawayo General Hospital</h2>
-            <h3>Enter your credentials to log in</h3>
-            <div className="icon">
-                <img src={logo} alt="logo"/>
-            </div>
-            <div className="form">
-                    <div className="form-group">
-                        <label for="username">Username</label>
-                        <input required onChange={onChange} className="form-control" type="text" id="username" name="username" placeholder="Username.." />
-                    </div>
+
+    if(!loading){
+        return (
+            <div>
+            <div className="container login-container">
+            <div className="header mt-5">
+                <h2 className="text-primary">Bulawayo General Hospital</h2>
+                <h3>Enter your credentials to log in</h3>
+                <div className="icon">
+                    <img src={logo} alt="logo"/>
+                </div>
     
-                    <div className="form-group">
-                        <label for="password">Password</label>
-                        <input required onChange={onChange} className="form-control" type="password" id="password" name="password" placeholder="Password.." />
-                    </div>
-                    <input onClick={onClick} className="login-btn btn btn-primary btn-block mt-2" type="button" name="login" value="Login"/>
+                {bunner.state ? <div className="alert alert-danger">{bunner.msg}</div> : null}
+    
+                <form onSubmit={onSubmit} className="form">
+                        <div className="form-group">
+                            <label for="username">Username</label>
+                            <input required onChange={onChange} className="form-control" type="text" id="username" name="username" placeholder="Username.." />
+                        </div>
+        
+                        <div className="form-group">
+                            <label for="password">Password</label>
+                            <input required onChange={onChange} className="form-control" type="password" id="password" name="password" placeholder="Password.." />
+                        </div>
+                        <input className="login-btn btn btn-primary btn-block mt-2" type="submit" name="login" value="Login"/>
+                </form>
             </div>
         </div>
-    </div>
-
-    <div className="footer">
-        <p id="copyright">Copyright &copy; {(new Date()).getFullYear()}</p>
-    </div>
-
-    </div>
-    );
+    
+            <div className="footer">
+                <p id="copyright">Copyright &copy; {(new Date()).getFullYear()}</p>
+            </div>
+        
+        </div>
+        );
+    }else{
+        return <Loading />
+    }
 }
 
 export default Login;

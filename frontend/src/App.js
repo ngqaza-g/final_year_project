@@ -12,42 +12,42 @@ const App = ()=>{
     const [login_token, setLoginToken] = useState(undefined);
     const [setToken, setSetToken] = useState(false); 
 
-
-    useEffect(()=>{
-
-            let login_token = cookie.get('login_token');
+    const validate_token = async ()=>{
+        let login_token = cookie.get('login_token');
             
-            if((cookie.get('login_token') !== undefined)){
-                
-                fetch('http://localhost:5000/', {
-                    headers:{
-                        "Content-Type" : "application/json"
-                    },
-                    method : "POST",
-                    body : JSON.stringify({
-                        token : login_token
-                    })
-                }).then(res =>{
-                    if(res.status === 200) return res.json()
-                    setSetToken(true);
-                })
-                .then(data =>{
-                    console.log(data);
-                    const {user} = data;
-                    setLoginToken(login_token);
-                    setUser(user);
-                    setSetToken(true);
-                }).catch(()=> {
-                    console.log("An error occured");
-                    setSetToken(true);
-                })
-            }else{
-                // setLoginToken(undefined);
-                setSetToken(true);
-            }
-        }, []);
+        if((cookie.get('login_token') !== undefined)){
 
-    
+            try{
+                const response = fetch('http://localhost:5000/', {
+                                    headers:{
+                                        "Content-Type" : "application/json"
+                                    },
+                                    method : "POST",
+                                    body : JSON.stringify({
+                                    token : login_token
+                                })});
+
+                if(response === 200){
+                    try{
+                        const data = await response.json();
+                        const {user} = data;
+                        setLoginToken(login_token);
+                        setUser(user);
+                    }catch(error){
+                        console.log("An error occured with the returned data");
+                    }
+                }else{
+                    console.log("Invalid Token");
+                }
+            }catch(error){
+                console.log("An Error occured connecting to server");
+            }
+        }
+        setSetToken(true);
+    }
+
+    useEffect(validate_token, []);
+
     if(!setToken){
         return <Loading />
     }else{
@@ -56,7 +56,6 @@ const App = ()=>{
                 {!login_token && (
                     <>
                         <Route exact path="/" element={<Login setLoginToken = {setLoginToken} setUser = {setUser}  />} />
-                        <Route path="/loading" element={<Loading />} />
                     </>
                 )}
                         
