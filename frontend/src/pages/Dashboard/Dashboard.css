@@ -18,15 +18,37 @@ html, body, #root{
     border-top: 1px solid #bbb;
 }
 
-.trancate{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.hidden{
+    display: inherit;
 }
 
-footer{
-    z-index: 1;
+.value .units, .more{
+    display: none;
 }
-.monitor{
+/* .monitor{
     height: 250px;
-}
+} */
+@media (max-width: 575.98px) {
+    .monitor{
+        margin: auto;
+    }
+
+    .value .units, .more{
+        display: inline;
+    }
+
+    .hidden{
+        display: none;
+    }
+
+    .controls{
+        justify-content: space-around;
+    }
+ }
+
+ 
+ @media (min-width: 575.98px) {
+     .nav-link{
+         padding: 0.5rem 0.5rem;
+     }
+  }

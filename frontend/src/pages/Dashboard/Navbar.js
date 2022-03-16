@@ -15,6 +15,7 @@ export default function Navbar({setLoginToken, setUser, user}){
     }
 
     return (
+       
     //   <!-- Navbar -->
     //     <!-- 
     //     brand name
@@ -26,19 +27,18 @@ export default function Navbar({setLoginToken, setUser, user}){
     //  -->
 
     <nav className="navbar navbar-dark bg-dark">
-        <div className="container-fluid">
-            <a href="#" className="navbar-brand ms-3">Bulawayo General</a>
+        <div className="container-fluid navbar-elements">
+            <a href="/" className="navbar-brand ms-3">Bulawayo General</a>
 
             {/* <!-- Nav dropdown menu --> */}
             <div className="dropdown me-5">
-                <span className="navbar-text username">{user.name}</span>
-                <a href="#" 
-                className="text-white dropdown-toggle"
-                role="button"
-                data-bs-toggle="dropdown"
+                <span className="navbar-text d-none d-sm-inline text-truncate username">{user.name}</span>
+                <button
+                    className="text-white dropdown-toggle"
+                    data-bs-toggle="dropdown"
                 >
                     <i className="bi bi-person-fill"></i>
-                </a>
+                </button>
 
                 <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                     <li>
@@ -48,14 +48,14 @@ export default function Navbar({setLoginToken, setUser, user}){
                     </li>
 
                     <li>
-                        <a href="#" className="dropdown-item">
+                        <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#change-password">
                             Change Password
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    //<!-- End of NavBar -->
+    
     );
 }

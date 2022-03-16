@@ -65,12 +65,12 @@ const Login = ({ setLoginToken, setUser })=>{
                  body : JSON.stringify(credentials)
              });
      
-             if(response.status == 200){
+             if(response.status === 200){
                  const data = await response.json();
                  if(data){
                      const {login_token, user} = data;
                      if(login_token){
-                         cookie.set('login_token', login_token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 5))});
+                         cookie.set('login_token', login_token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 7))});
                          setLoginToken(login_token);
                          setUser(user);
                          navigate(destination);

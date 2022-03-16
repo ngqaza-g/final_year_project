@@ -18,16 +18,17 @@ const App = ()=>{
         if((cookie.get('login_token') !== undefined)){
 
             try{
-                const response = fetch('http://localhost:5000/', {
+                const response = await fetch('http://localhost:5000/', {
                                     headers:{
                                         "Content-Type" : "application/json"
                                     },
                                     method : "POST",
                                     body : JSON.stringify({
-                                    token : login_token
-                                })});
+                                        token : login_token
+                                    })
+                            });
 
-                if(response === 200){
+                if(response.status === 200){
                     try{
                         const data = await response.json();
                         const {user} = data;
@@ -37,6 +38,7 @@ const App = ()=>{
                         console.log("An error occured with the returned data");
                     }
                 }else{
+                    console.log(response.status);
                     console.log("Invalid Token");
                 }
             }catch(error){
