@@ -31,14 +31,14 @@ export default function Navbar({setLoginToken, setUser, user}){
             <a href="/" className="navbar-brand ms-3">Bulawayo General</a>
 
             {/* <!-- Nav dropdown menu --> */}
-            <div className="dropdown me-5">
-                <span className="navbar-text d-none d-sm-inline text-truncate username">{user.name}</span>
-                <button
+            <div className="d-flex align-items-center dropdown me-5">
+                <div className="navbar-text d-none d-sm-inline text-truncate username me-4"><span className="me-1">{user.role}</span>{user.name}</div>
+                <a
                     className="text-white dropdown-toggle"
                     data-bs-toggle="dropdown"
                 >
                     <i className="bi bi-person-fill"></i>
-                </button>
+                </a>
 
                 <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                     <li>

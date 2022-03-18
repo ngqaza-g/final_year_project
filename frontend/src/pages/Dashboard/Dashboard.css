@@ -25,6 +25,11 @@ html, body, #root{
 .value .units, .more{
     display: none;
 }
+
+.bed-number{
+    width: 30px;
+    height: 30px;
+}
 /* .monitor{
     height: 250px;
 } */
