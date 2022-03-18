@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 const register = (req, res, next)=>{
-    const {name, username, email, password} = req.body;
+    const {name, username, email, password, role} = req.body;
     
     User.find({username : username, email : email}).then((doc)=>{
         if(doc.length === 0){
@@ -11,7 +11,8 @@ const register = (req, res, next)=>{
                     name : name,
                     username : username,
                     email : email,
-                    password : hashedPassword
+                    password : hashedPassword,
+                    role : role
                 });
     
                 newUser.save().then(()=>{

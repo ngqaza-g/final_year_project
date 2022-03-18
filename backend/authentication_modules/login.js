@@ -28,7 +28,8 @@ const login = (req, res)=>{
                         const userData = {
                             name : user.name,
                             email : user.email,
-                            username : user.username
+                            username : user.username,
+                            role : user.role
                         }
                         
                         res.json({msg : "Logged in", user : userData, login_token : token});
