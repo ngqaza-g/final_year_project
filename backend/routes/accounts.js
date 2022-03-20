@@ -24,6 +24,6 @@ router.post('/login', login);
 
 router.post('/logout', [validate_token ,logout]);
 
-router.post('/change_password', [validate_token, change_password, logout]);
+router.post('/change_password', [validate_token, change_password]);
 
 module.exports = router;

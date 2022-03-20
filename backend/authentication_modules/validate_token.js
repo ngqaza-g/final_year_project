@@ -28,7 +28,7 @@ const validate_token = async (req, res, next)=>{
                 res.status(500).json({msg : "Failed to varify token"});
             }
         }else{
-            res.status(404).json({msg : "No token password"});
+            res.status(404).json({msg : "No token passed"});
         }
     }catch{
         res.status(500).json({msg: "Server Error Occured"});

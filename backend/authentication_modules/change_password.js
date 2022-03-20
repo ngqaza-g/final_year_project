@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
-const change_password = async (req, res, next)=>{
-    
+const change_password = async (req, res)=>{
+
     try{
         const { current_password, new_password } = req.body;
         //Validate the token
@@ -16,8 +16,8 @@ const change_password = async (req, res, next)=>{
              // Update the database with the new password
             const hashedPassword = await bcrypt.hash(new_password, 10);
             await User.updateOne({_id: user._id} , {password: hashedPassword});
-          
-            next();
+            console.log(user);
+            res.json({msg: "Successfully changed the password"});
         }else{
             res.status(401).json({msg: "Passwords dont match"});
         }
