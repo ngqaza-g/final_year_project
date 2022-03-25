@@ -3,8 +3,11 @@ const User = require('../models/User');
 
 const register = async (req, res)=>{
     try{
-        const {name, username, email, password, role} = req.body;
-        
+        const {firstName, lastName, username, email, role} = req.body;
+        let name = "";
+        name = name.concat(firstName, " ", lastName);
+        const password = username;
+
         const user = await User.findOne({username : username, email : email});
         console.log(user);
         if(!user){
