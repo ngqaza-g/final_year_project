@@ -4,7 +4,7 @@ import Report from './Report';
 import Treatment from './Treatment';
 import Discharge from './Discharge';
 
-export default function Controls({id, name}){
+export default function Controls({id, name, role}){
     return(
                     <div className="d-flex justify-content-center">
                     <button type="button" className="btn btn-sm btn-outline-primary me-1 my-1 text-truncate" data-bs-toggle ="modal" data-bs-target={`#report-modal-${id}`}>Report</button>
@@ -19,10 +19,11 @@ export default function Controls({id, name}){
                             <button type="button" className="dropdown-item btn btn-sm btn-outline-secondary me-1 my-1 text-truncate" data-bs-toggle ="modal" data-bs-target={`#analyse-modal-${id}`}>Analyse Treatment</button>
                             <button type="button" className="dropdown-item btn btn-sm btn-outline-success me-1 my-1 text-truncate" data-bs-toggle ="modal" data-bs-target={`#discharge-modal-${id}`}>Discharge</button>
                         </div>
+
                     </div>
-                    <Report id={id} name={name}/>
+                    <Report role={role} id={id} name={name}/>
                     <Discharge id={id} name={name} />
-                    <Treatment id={id} name={name}/>
+                    <Treatment role={role} id={id} name={name}/>
                     <Analyse id={id} name={name}/>
                 </div>
     );

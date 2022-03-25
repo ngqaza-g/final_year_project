@@ -5,7 +5,7 @@ import Ecg from './vitals/Ecg';
 
 
 
-export default function Monitor({name, age, sex, id}){
+export default function Monitor({name, age, sex, id, role}){
 
 
     return (
@@ -37,7 +37,7 @@ export default function Monitor({name, age, sex, id}){
             </div>
 
             {/* <!-- controls -->  */}
-                <Controls id={id} name={name} />
+                <Controls role={role} id={id} name={name} />
             {/* <!-- End of controls -->  */}
 
         </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function Report({id, name}){
+export default function Report({id, name, role}){
+
     return (
         <div className="modal  fade" id={`report-modal-${id}`}>
             <div className="modal-lg modal-dialog modal-dialog-scrollable">
@@ -10,32 +11,37 @@ export default function Report({id, name}){
                         <button className="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div className="modal-body">
-                    <div className="mb-3">
-                            <label className="form-label">Enter Blood Pressure Reading:</label>
-                            <input className="form-control" />
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="form-label">Nursing Care Plan:</label>
-                            <div className="form-text">
-                                <h6>Documentation Guideline</h6>
-                                <p>Patient Assesment</p>
-                                <p>Nursing Diagnosis</p>
-                                <p>Nursing Care Plan</p>
-                                <p>Implementation & Evaluation</p>
+                    {role.toLowerCase() === "doctor" ? <div className="h4">You are a doctor </div> : 
+                        (
+                        <div>
+                            <div className="mb-3">
+                                <label className="form-label">Enter Blood Pressure Reading:</label>
+                                <input className="form-control" />
                             </div>
-                            <textarea class="form-control" rows="5"></textarea>
-                        </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Nursing Care Plan:</label>
+                                    <div className="form-text">
+                                        <h6>Documentation Guideline</h6>
+                                        <p>Patient Assesment</p>
+                                        <p>Nursing Diagnosis</p>
+                                        <p>Nursing Care Plan</p>
+                                        <p>Implementation & Evaluation</p>
+                                    </div>
+                                    <textarea class="form-control" rows="5"></textarea>
+                                </div>
 
-                        <div className="mb-3">
-                            <label className="form-label">Enter Report:</label>
-                            <textarea class="form-control" rows="5"></textarea>
+                            <div className="mb-3">
+                                    <label className="form-label">Enter Report:</label>
+                                    <textarea class="form-control" rows="5"></textarea>
+                            </div>
                         </div>
+                        )
+                    }
+
                     </div>
-
                     <div className="modal-footer">
                         <button className="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                        <button className="btn btn-outline-success">Save Report</button>
+                        {!(role.toLowerCase() === "doctor") ? <button className="btn btn-outline-success">Save Report</button> :  ""}
                     </div>
                 </div>
             </div>

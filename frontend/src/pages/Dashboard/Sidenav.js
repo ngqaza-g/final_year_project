@@ -1,6 +1,27 @@
-import React from "react";
+import React, {useEffect} from "react";
 
-export default function Sidenav({user}){
+export default function Sidenav({setNav, role}){
+    useEffect(()=>{
+        const navs = document.querySelectorAll('.side-bar-nav-link');
+        navs.forEach(nav => {
+            nav.addEventListener('click', ()=>{
+                navs.forEach(element =>{
+                    const classes = element.classList;
+                    for(const key in classes){
+                        if(classes[key] === "active") element.classList.remove("active");
+                    }
+                });
+                nav.classList.add('active');
+            });
+        });
+
+        // return (
+        //     navs.forEach(nav =>{
+        //         nav.removeEventListener('click');
+        //     });
+        // );
+    }, []);
+
     return (
     //           <!-- Side Navbar -->
     //     <!-- 
@@ -16,39 +37,49 @@ export default function Sidenav({user}){
         <div className="container-fluid d-flex flex-column align-items-center">
             <ul className="nav nav-pills flex-column mt-4">
                 <li className="nav-item">
-                    <button className="nav-link side-bar-nav-link active text-white text-truncate">
+                    <button onClick={()=>{setNav("dashboard")}} className="nav-link side-bar-nav-link active text-white text-truncate">
                         <i className="bi bi-heart-pulse-fill me-2"></i>
                         <p className="d-none d-lg-inline">Dashboard</p>
                     </button>
                 </li>
 
                 <li className="nav-item">
-                    <button className="nav-link side-bar-nav-link text-white text-truncate">
+                    <button onClick={()=>{setNav("admit")}} className="nav-link side-bar-nav-link text-white text-truncate">
                         <i className="bi bi-hospital-fill me-2"></i>
                         <p className="d-none d-lg-inline">Admit Patient</p>
                     </button>
                 </li>
 
                 <li className="nav-item">
-                    <button className="nav-link side-bar-nav-link text-white text-truncate">
+                    <button onClick={()=>{setNav("patients")}} className="nav-link side-bar-nav-link text-white text-truncate">
                         <i className="bi bi-file-medical-fill me-2"></i>
                         <p className="d-none d-lg-inline">Patients Info</p>
                     </button>
                 </li>
 
                 <li className="nav-item">
-                    <button className="nav-link side-bar-nav-link text-white text-truncate">
+                    <button onClick={()=>{setNav("duty")}} className="nav-link side-bar-nav-link text-white text-truncate">
                         <i className="bi bi-table me-2"></i>
                         <p className="d-none d-lg-inline">Duty Table</p>
                     </button>
                 </li>
 
                 <li className="nav-item">
-                    <button className="nav-link side-bar-nav-link text-white text-truncate">
+                    <button onClick={()=>{setNav("global")}} className="nav-link side-bar-nav-link text-white text-truncate">
                     <i className="bi bi-gear-fill me-2"></i>
                     <p className="d-none d-lg-inline">Global Settings</p>
                     </button>
                 </li>
+                {
+                    role === "Admin" ?
+                    <li className="nav-item">
+                        <button onClick={()=>{setNav("register")}} className="nav-link side-bar-nav-link text-white text-truncate">
+                        <i className="bi bi-person-plus-fill me-2"></i>
+                        <p className="d-none d-lg-inline">Register</p>
+                        </button>
+                    </li> : ""
+                }
+
             </ul>
         </div>
      </div>

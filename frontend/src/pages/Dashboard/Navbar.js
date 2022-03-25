@@ -1,17 +1,38 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import Cookies from 'universal-cookie';
+import ChangePassword from "./ChangePassword";
 
 export default function Navbar({setLoginToken, setUser, user}){
 
   const navigate = useNavigate();
   const cookie = new Cookies();
 
-  const logout = ()=>{
-    cookie.remove('login_token'); // Remove the cookie
-    setLoginToken(undefined); // set the login token to undefined (deleting it))
-    setUser(undefined); // set the user to undefined
-    navigate('/'); // Navigate to the login page
+  const logout = async ()=>{
+
+        // try{
+            const token = cookie.get('login_token');
+            const response = await fetch('http://localhost:5000/logout', {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({token : token})
+            });
+            if(response.status === 200){
+                cookie.remove('login_token'); // Remove the cookie
+                setLoginToken(undefined); // set the login token to undefined (deleting it))
+                setUser(undefined); // set the user to undefined
+                navigate('/'); // Navigate to the login page
+        
+            }else{
+                const data = await response.json();
+                console.log(data.msg);
+            }
+
+        // }catch{
+        //     console.log("Server Offline");
+        // }
     }
 
     return (
@@ -32,9 +53,9 @@ export default function Navbar({setLoginToken, setUser, user}){
 
             {/* <!-- Nav dropdown menu --> */}
             <div className="d-flex align-items-center dropdown me-5">
-                <div className="navbar-text d-none d-sm-inline text-truncate username me-4"><span className="me-1">{user.role}</span>{user.name}</div>
+                <div className="navbar-text d-none d-sm-inline text-truncate username me-2"><span className="me-1">{user.role}</span>{user.name}</div>
                 <a
-                    className="text-white dropdown-toggle"
+                    className="text-white dropdown-toggle d-flex justify-content-center align-items-center avater"
                     data-bs-toggle="dropdown"
                 >
                     <i className="bi bi-person-fill"></i>
@@ -55,6 +76,7 @@ export default function Navbar({setLoginToken, setUser, user}){
                 </ul>
             </div>
         </div>
+        <ChangePassword logout={logout} />
     </nav>
     
     );

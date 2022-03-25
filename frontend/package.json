@@ -1,7 +1,9 @@
 {
-  "name": "react-lap",
+  "name": "Bulawayo_General_Hospital_React_Application",
   "version": "0.1.0",
   "private": true,
+  "author": "Ngqabutho Dlamini",
+  "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -12,6 +14,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^6.2.2",
     "react-scripts": "3.4.1",
+    "socket.io": "^4.4.1",
     "universal-cookie": "^4.0.4"
   },
   "scripts": {

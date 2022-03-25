@@ -1,7 +1,7 @@
 import React from 'react';
 import Monitor from './Monitor';
 
-export default function Display(){
+export default function Display({ role }){
         const patients =[
         {
             name: "John Doe",
@@ -35,17 +35,15 @@ export default function Display(){
 
     return (
                     //  <!-- Main section --> 
-                     <div className="col-sm-11 col-lg-10 p-3">
                      <div className="row">
 
                         {
                             patients.map(patient=>(
-                                <Monitor name={patient.name} age={patient.age} sex={patient.sex} id={patient.id}/>
+                                <Monitor role = {role} name={patient.name} age={patient.age} sex={patient.sex} id={patient.id}/>
                             ))
                         }
 
                      </div>
-                  </div>
                 //   <!-- End of Mian -->
     );
 }
