@@ -57,6 +57,10 @@ html, body, #root{
     .controls{
         justify-content: space-around;
     }
+
+    .nav-link{
+        padding: 0.5rem 0.5rem;
+    }
  }
 
  
@@ -64,4 +68,14 @@ html, body, #root{
      .nav-link{
          padding: 0.5rem 0.5rem;
      }
+  }
+  @media (max-width: 991.98px){
+    .nav-link{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+    }
+    .nav-link i{
+        margin-right : 0 !important;
+    }
   }

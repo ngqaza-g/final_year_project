@@ -34,7 +34,7 @@ export default function Sidenav({setNav, role}){
 
      <div className="bg-dark d-none d-sm-flex flex-column text-white col-sm-1 col-lg-2 h-100  sidebar">
 
-        <div className="container-fluid d-flex flex-column align-items-center">
+        <div className="d-flex flex-column align-items-center">
             <ul className="nav nav-pills flex-column mt-4">
                 <li className="nav-item">
                     <button onClick={()=>{setNav("dashboard")}} className="nav-link side-bar-nav-link active text-white text-truncate">
