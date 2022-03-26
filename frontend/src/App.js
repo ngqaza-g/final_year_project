@@ -19,7 +19,7 @@ const App = ()=>{
         if((cookie.get('login_token') !== undefined)){
 
             try{
-                const request = (login_token_ === undefined) ? 'http://localhost:5000/renew_token' : 'http//localhost:5000/';
+                const request = (login_token_ === undefined) ? 'http://localhost:5000/renew_token' : 'http://localhost:5000/';
                 const response = await fetch(request, {
                                     headers:{
                                         "Content-Type" : "application/json"
@@ -30,9 +30,11 @@ const App = ()=>{
                                     })
                             });
 
+                const data = await response.json();
+
                 if(response.status === 200){
                     try{
-                        const data = await response.json();
+                        
 
                         if(login_token_ === undefined){
                             const { token } = data;
@@ -40,7 +42,7 @@ const App = ()=>{
                             cookie.set('login_token', token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 7))});
                             cookie.set('login_token_', "1" ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 2))});
                         }
-                        
+
                         const {user} = data;
                         setLoginToken(login_token);
                         setUser(user);
@@ -49,6 +51,7 @@ const App = ()=>{
                     }
                 }else{
                     console.log(response.status);
+                    console.log(data);
                     console.log("Invalid Token");
                 }
             }catch(error){
