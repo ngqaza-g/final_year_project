@@ -9,75 +9,18 @@ export default function ChangePassword({ logout }){
     const token = cookies.get('login_token');
     const [loading, setLoading] = useState(false);
 
-    const [passwords, setPasswords] = useState({
-        // current_password : "",
-        // new_password : "",
-        // repeat_new_password: ""
-    });
+    const [passwords, setPasswords] = useState({});
     const onChange = (e)=>{
         const {name, value} = e.target;
         updateForm(name, value, setPasswords);
-        // if(name === "current_password"){
-        //     setPasswords(prev=>{
-        //         return({
-        //                 current_password : value,
-        //                 new_password: prev.new_password,
-        //                 repeat_new_password: prev.repeat_new_password
-        //             });
-        //     });
-        // }
-        // if(name === "new_password"){
-        //     setPasswords(prev=>{
-        //         return({
-        //                 current_password : prev.current_password,
-        //                 new_password: value,
-        //                 repeat_new_password: prev.repeat_new_password
-        //             });
-        //     });
-        // }
-        // if(name === "repeat_new_password"){
-        //     setPasswords(prev=>{
-        //         return({
-        //                 current_password : prev.current_password,
-        //                 new_password: prev.new_password,
-        //                 repeat_new_password: value
-        //             });
-        //     });
-        // }
     }
-    // const displayMsg = (msg, type)=>{
-    //     setLoading(false);
-    //     setBunner(prev=>{
-    //         return {
-    //             active: true,
-    //             msg: msg,
-    //             type: type 
-    //         }
-    //     });
-
-    //     setTimeout(()=>{
-    //         if(type === "success"){
-    //             console.log("success")
-    //             document.querySelector('.change-password-close').click();
-    //             logout();
-    //         }
-            
-    //         setBunner(prev=>{
-    //             return {
-    //                 active: false,
-    //                 msg: "",
-    //                 type:"" 
-    //             }
-    //         });
-    //     }, 5000);
-    // }
 
     const submit = async (e)=>{
         e.preventDefault();
         
         try{
             if((passwords.current_password !== passwords.new_password) && (passwords.new_password === passwords.repeat_new_password)){
-                    const status = await sendForm('http://localhost:5000/change_password', {token: token, ...passwords}, setPasswords, setLoading);
+                    const { status } = await sendForm('http://localhost:5000/change_password', {token: token, ...passwords}, setPasswords, setLoading);
                     document.querySelector('.change-password-close').click();
                     if(status === 200){
                         logout();

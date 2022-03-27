@@ -40,7 +40,7 @@ const sendForm = async (url, form, setForm, setLoading)=>{
         return form;
     });
 
-    return status;
+    return {status : status, data : data};
 }
 
 export default sendForm;
