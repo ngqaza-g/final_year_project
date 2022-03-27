@@ -7,7 +7,9 @@ async function post(url, data){
         body: JSON.stringify(data)
     });
 
-    return response
+    const status = response.status;
+    const response_data = await response.json();
+    return {status : status, data : response_data};
 }
 
-export default post
+export default post;

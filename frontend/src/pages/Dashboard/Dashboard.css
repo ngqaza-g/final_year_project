@@ -13,20 +13,69 @@ html, body, #root{
     margin-left: 10px;
 }
 
+.avater{
+    width: 40px;
+    height: 40px;
+    border: 1px white solid;
+    border-radius: 50%;
+}
+
+
 
 .sidebar, footer{
     border-top: 1px solid #bbb;
 }
 
-.trancate{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.hidden{
+    display: inherit;
 }
 
-footer{
-    z-index: 1;
+.value .units, .more{
+    display: none;
 }
-.monitor{
+
+.bed-number{
+    width: 30px;
+    height: 30px;
+}
+/* .monitor{
     height: 250px;
-}
+} */
+@media (max-width: 575.98px) {
+    .monitor{
+        margin: auto;
+    }
+
+    .value .units, .more{
+        display: inline;
+    }
+
+    .hidden{
+        display: none;
+    }
+
+    .controls{
+        justify-content: space-around;
+    }
+
+    .nav-link{
+        padding: 0.5rem 0.5rem;
+    }
+ }
+
+ 
+ @media (min-width: 575.98px) {
+     .nav-link{
+         padding: 0.5rem 0.5rem;
+     }
+  }
+  @media (max-width: 991.98px){
+    .nav-link{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+    }
+    .nav-link i{
+        margin-right : 0 !important;
+    }
+  }

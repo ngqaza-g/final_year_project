@@ -1,21 +1,22 @@
 {
-  "name": "account-api",
+  "name": "Bulawayo_General_Hospital_Backend_Server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev" : "nodemon index",
-    "start" : "node index"
+    "dev": "nodemon index",
+    "start": "node index"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ngqabutho Dlamini",
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.17.2",
-    "mongoose": "^6.1.5"
+    "mongoose": "^6.1.5",
+    "socket.io": "^4.4.1"
   }
 }
