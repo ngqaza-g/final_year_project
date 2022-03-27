@@ -10,7 +10,7 @@ export default function Navbar({setLoginToken, setUser, user}){
 
   const logout = async ()=>{
 
-        // try{
+        try{
             const token = cookie.get('login_token');
             const response = await fetch('http://localhost:5000/logout', {
                 method: "POST",
@@ -30,9 +30,13 @@ export default function Navbar({setLoginToken, setUser, user}){
                 console.log(data.msg);
             }
 
-        // }catch{
-        //     console.log("Server Offline");
-        // }
+        }catch{
+            console.log("Server Offline");
+        }
+    }
+
+    const capitaliseFirstLetter = (word)=>{
+        return word.charAt(0).toUpperCase() + word.slice(1);
     }
 
     return (
@@ -53,7 +57,7 @@ export default function Navbar({setLoginToken, setUser, user}){
 
             {/* <!-- Nav dropdown menu --> */}
             <div className="d-flex align-items-center dropdown me-5">
-                <div className="navbar-text d-none d-sm-inline text-truncate username me-2"><span className="me-1">{user.role}</span>{user.name}</div>
+                <div className="navbar-text d-none d-sm-inline text-truncate username me-2"><span className="me-1">{capitaliseFirstLetter(user.role)}</span>{user.name}</div>
                 <a
                     className="text-white dropdown-toggle d-flex justify-content-center align-items-center avater"
                     data-bs-toggle="dropdown"
