@@ -5,6 +5,7 @@ import Login from './pages/Login/Login';
 import Loading from './pages/Loading/Loading';
 import Dashboard from './pages/Dashboard/Dashboard';
 import './App.css';
+import sendForm from './pages/Dashboard/components/Form_componets/sendForm';
 
 const App = ()=>{
     const cookie = new Cookies(); 
@@ -18,26 +19,13 @@ const App = ()=>{
         
         if((cookie.get('login_token') !== undefined)){
 
-            try{
                 const request = (login_token_ === undefined) ? 'http://localhost:5000/renew_token' : 'http://localhost:5000/';
-                const response = await fetch(request, {
-                                    headers:{
-                                        "Content-Type" : "application/json"
-                                    },
-                                    method : "POST",
-                                    body : JSON.stringify({
-                                        token : login_token
-                                    })
-                            });
+                const { status, data } = await sendForm(request, {token : login_token});
 
-                const data = await response.json();
-
-                if(response.status === 200){
-                    try{
-                        
-
+                if(status === 200){
                         if(login_token_ === undefined){
                             const { token } = data;
+                            console.log(data);
                             login_token = token;
                             cookie.set('login_token', token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 7))});
                             cookie.set('login_token_', "1" ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 2))});
@@ -46,17 +34,7 @@ const App = ()=>{
                         const {user} = data;
                         setLoginToken(login_token);
                         setUser(user);
-                    }catch(error){
-                        console.log("An error occured with the returned data");
-                    }
-                }else{
-                    console.log(response.status);
-                    console.log(data);
-                    console.log("Invalid Token");
                 }
-            }catch(error){
-                console.log("An Error occured connecting to server");
-            }
         }
             
         setSetToken(true);
