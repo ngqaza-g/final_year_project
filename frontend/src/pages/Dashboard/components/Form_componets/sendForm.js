@@ -2,47 +2,56 @@ import post from '../../../../modules/post';
 import toast from 'react-hot-toast';
 const sendForm = async (url, form, setForm, setLoading)=>{
     if(setLoading) setLoading(true);
-    
     const toastId = toast.loading("Loading.....");
-    const {status, data}  = await post(url, form);
-    if(setLoading) setLoading(false);
-
-    if(status === 200){
-        toast.success(data.msg, {
-            id: toastId
-        });
-    }else{
-        toast.error(data.msg, {
-            id: toastId
-        });
-    }
+    let response = {};
+    try{
+        const {status, data}  = await post(url, form);
+        if(setLoading) setLoading(false);
     
-
-    if(setForm){
-
-        setForm(prev=>{
-            const form = {...prev};
+        if(status === 200){
+            toast.success(data.msg, {
+                id: toastId
+            });
+        }else{
+            toast.error(data.msg, {
+                id: toastId
+            });
+        }
+        
     
-            for(const key in form){
+        if(setForm){
     
-              if(typeof(form[key]) === "object"){
-    
-                for(const key_ in form[key]){
-    
-                  form[key][key_] = "";
-    
+            setForm(prev=>{
+                const form = {...prev};
+        
+                for(const key in form){
+        
+                  if(typeof(form[key]) === "object"){
+        
+                    for(const key_ in form[key]){
+        
+                      form[key][key_] = "";
+        
+                    }
+        
+                  }else{
+        
+                    form[key] = "";
+                  }
                 }
-    
-              }else{
-    
-                form[key] = "";
-              }
-            }
-            return form;
+                return form;
+            });
+        }
+        response = {status : status, data : data};
+    }catch{
+        setLoading(false);
+        toast.error("An Error Occured Conneting to the Server",{
+            id: toastId
         });
+        response = {status: 500};
     }
 
-    return {status : status, data : data};
+    return response;
 }
 
 export default sendForm;

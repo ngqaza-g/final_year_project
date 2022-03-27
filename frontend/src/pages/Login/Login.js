@@ -23,20 +23,15 @@ const Login = ({ setLoginToken, setUser })=>{
     }
 
     const authenticate = async (credentials, destination)=>{
-        try{
-            const { status, data } = await sendForm('http://localhost:5000/login', credentials, setCredentials, setLoading);
+        const { status, data } = await sendForm('http://localhost:5000/login', credentials, setCredentials, setLoading);
 
-            if(status === 200){
-                const {login_token, user} = data;
-                cookie.set('login_token', login_token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 7))});
-                cookie.set('login_token_', "1" ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 2))});
-                setLoginToken(login_token);
-                setUser(user);
-                navigate(destination);
-            }
-        }catch(error){
-            setLoading(false);
-            toast.error("An Error Occured Conneting to the Server");
+        if(status === 200){
+            const {login_token, user} = data;
+            cookie.set('login_token', login_token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 7))});
+            cookie.set('login_token_', "1" ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 2))});
+            setLoginToken(login_token);
+            setUser(user);
+            navigate(destination);
         }
 
     }
@@ -59,7 +54,7 @@ const Login = ({ setLoginToken, setUser })=>{
                 <div className="icon">
                     <img src={logo} alt="logo"/>
                 </div>
-                    
+
                 <form onSubmit={onSubmit} className="form">
                         <div className="form-group">
                             <label for="username">Username</label>

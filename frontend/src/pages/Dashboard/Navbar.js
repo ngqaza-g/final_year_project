@@ -11,31 +11,16 @@ export default function Navbar({setLoginToken, setUser, user}){
   const cookie = new Cookies();
 
   const logout = async ()=>{
+      
+        const token = cookie.get('login_token');
+        const {status} = await sendForm('http://localhost:5000/logout', {token : token});
+        if(status === 200){
+            cookie.remove('login_token'); // Remove the cookie
+            setLoginToken(undefined); // set the login token to undefined (deleting it))
+            setUser(undefined); // set the user to undefined
+            navigate('/'); // Navigate to the login page
 
-        // try{
-            const token = cookie.get('login_token');
-            const response = await sendForm('http://localhost:5000/logout', {token : token});
-            // const response = await fetch('http://localhost:5000/logout', {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type" : "application/json"
-            //     },
-            //     body: JSON.stringify({token : token})
-            // });
-            if(response.status === 200){
-                cookie.remove('login_token'); // Remove the cookie
-                setLoginToken(undefined); // set the login token to undefined (deleting it))
-                setUser(undefined); // set the user to undefined
-                navigate('/'); // Navigate to the login page
-        
-            }else{
-                const data = await response.json();
-                console.log(data.msg);
-            }
-
-        // }catch{
-        //     console.log("Server Offline");
-        // }
+        }
     }
 
     const capitaliseFirstLetter = (word)=>{
