@@ -10,7 +10,7 @@ app.use(cors({
 }));
 // app.use(cookieParser());
 app.use('/', require('./routes/accounts'));
-app.use('/patient/', require('./routes/patients'));
+app.use('/patients/', require('./routes/patients'));
 
 const PORT = 5000;
 

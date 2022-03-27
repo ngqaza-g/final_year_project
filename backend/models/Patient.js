@@ -10,23 +10,21 @@ const patientSchema = mongoose.Schema({
     next_of_kin: {
         name : String,
         address: String,
-        phone_number: String
+        phone_number: String,
+        national_id : String
     },
 
     case_description: {
         bp: String,
         spo2: String,
         temperature: String,
-        description: String
+        case_description: String
     },
 
     care_givers: {
         doctor: String,
-        nurses: {
-            senior_nurses : String,
-            nurse_day: String,
-            nurse_night: String
-        }
+        day_nurse: String,
+        night_nurse: String
     }
 });
 
