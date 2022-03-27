@@ -1,7 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import Cookies from 'universal-cookie';
+import post from "../../modules/post";
 import ChangePassword from "./ChangePassword";
+import sendForm from "./components/Form_componets/sendForm";
 
 export default function Navbar({setLoginToken, setUser, user}){
 
@@ -10,15 +12,16 @@ export default function Navbar({setLoginToken, setUser, user}){
 
   const logout = async ()=>{
 
-        try{
+        // try{
             const token = cookie.get('login_token');
-            const response = await fetch('http://localhost:5000/logout', {
-                method: "POST",
-                headers: {
-                    "Content-Type" : "application/json"
-                },
-                body: JSON.stringify({token : token})
-            });
+            const response = await sendForm('http://localhost:5000/logout', {token : token});
+            // const response = await fetch('http://localhost:5000/logout', {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type" : "application/json"
+            //     },
+            //     body: JSON.stringify({token : token})
+            // });
             if(response.status === 200){
                 cookie.remove('login_token'); // Remove the cookie
                 setLoginToken(undefined); // set the login token to undefined (deleting it))
@@ -30,9 +33,9 @@ export default function Navbar({setLoginToken, setUser, user}){
                 console.log(data.msg);
             }
 
-        }catch{
-            console.log("Server Offline");
-        }
+        // }catch{
+        //     console.log("Server Offline");
+        // }
     }
 
     const capitaliseFirstLetter = (word)=>{

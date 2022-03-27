@@ -5,7 +5,6 @@ import RadioInputs from './components/Register_components/RadioInputs';
 
 export default function Register(){
     const [form, setForm] = useState({});
-
     const [loading, setLoading] = useState(false);
 
     const onChange = (e)=>{
