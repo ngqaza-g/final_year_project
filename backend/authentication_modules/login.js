@@ -6,10 +6,9 @@ const crypto = require('crypto');
 const login = async (req, res)=>{
 
     try{
-        
         const {username, password} = req.body;
         const user = await User.findOne({username : username});
-        if(Object.keys(user).length !== 0){
+        if(user){
             const isMatch = await bcrypt.compare(password, user.password);
             if(isMatch){
                 const expire = (1000 * 3600 * 24 * 7) + Date.now();

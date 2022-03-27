@@ -7,9 +7,7 @@ const register = async (req, res)=>{
         let name = "";
         name = name.concat(firstName, " ", lastName);
         const password = username;
-
-        const user = await User.findOne({username : username, email : email});
-        console.log(user);
+        const user = await User.findOne({username : username});
         if(!user){
             const hashedPassword = await bcrypt.hash(password, 10);  
             const newUser = new User({
