@@ -39,6 +39,8 @@ const sendForm = async (url, form, setForm, setLoading)=>{
         }
         return form;
     });
+
+    return status;
 }
 
 export default sendForm;
