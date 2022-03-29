@@ -31,8 +31,13 @@ export default function Form({id, name, role, user_id, type}){
     }
 
     useEffect(()=>{
-        setSave(!(role.toLowerCase() === "doctor"));
-        setView((role.toLowerCase() === "doctor"));
+        if(type !== "treatment"){
+            setSave(!(role.toLowerCase() === "doctor"));
+            setView((role.toLowerCase() === "doctor"));
+        }else{
+            setSave((role.toLowerCase() === "doctor"));
+            setView(!(role.toLowerCase() === "doctor"));
+        }
     }, []);
 
     return (

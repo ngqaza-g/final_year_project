@@ -13,8 +13,7 @@ export default async function loadReports(type, patient_id, setLoading, setRepor
         setLoading,
         false
     );
-
-    console.log(data);
+    
     if(status === 200){
         setReports(generateReports(data.reports, type));
     }

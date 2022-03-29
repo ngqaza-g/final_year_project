@@ -16,9 +16,12 @@ const sendForm = async (url, form, setForm, setLoading, showToast = true)=>{
                     id: toastId
                 });
             }else{
-                toast.error(data.msg, {
-                    id: toastId
-                });
+                if(showToast){
+                    toast.error(data.msg, {
+                        id: toastId
+                    });
+
+                } 
             }
         }
         
@@ -49,9 +52,11 @@ const sendForm = async (url, form, setForm, setLoading, showToast = true)=>{
         response = {status : status, data : data};
     }catch{
         if(setLoading) setLoading(false);
-        toast.error("An Error Occured Conneting to the Server",{
-            id: toastId
-        });
+        if(showToast){
+            toast.error("An Error Occured Conneting to the Server",{
+                id: toastId
+            });
+        }
         response = {status: 500};
     }
 

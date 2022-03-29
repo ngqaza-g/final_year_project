@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import generateReports from './generateReports';
 import Accordion from '../../../components/Accordion/Accordion';
-import sendForm from '../../../components/Form_componets/sendForm';
 import loadReports from './loadReports';
 
 export default function View({patient_id, type}){
