@@ -10,8 +10,8 @@ export default function Analyse({id, name}){
                         <button className="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div className="modal-body">
-                        <div class="spinner-border d-flex justify-content-center" role="status">
-                            <span class="visually-hidden">Loading...</span>
+                        <div className="spinner-border d-flex justify-content-center" role="status">
+                            <span className="visually-hidden">Loading...</span>
                         </div>
                     </div>
                     <div className="modal-footer">

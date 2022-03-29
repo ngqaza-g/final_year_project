@@ -1,13 +1,13 @@
 import React from 'react';
-import Monitor from './Monitor';
+import Monitor from './Monitor/Monitor';
 
-export default function Display({ role }){
+export default function Display({ role, user_id }){
         const patients =[
         {
             name: "John Doe",
             age: 45,
             sex : "M",
-            id : Math.floor(Math.random()*100)
+            id : 60
         },
 
         {
@@ -39,7 +39,14 @@ export default function Display({ role }){
 
                         {
                             patients.map(patient=>(
-                                <Monitor role = {role} name={patient.name} age={patient.age} sex={patient.sex} id={patient.id}/>
+                                <Monitor 
+                                    role = {role} 
+                                    name={patient.name} 
+                                    age={patient.age} 
+                                    sex={patient.sex} 
+                                    id={patient.id} 
+                                    user_id={user_id}
+                                />
                             ))
                         }
 

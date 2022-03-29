@@ -4,10 +4,10 @@ import Report from './Report';
 import Treatment from './Treatment';
 import Discharge from './Discharge';
 
-export default function Controls({id, name, role}){
+export default function Controls({id, name, role, user_id}){
     return(
                     <div className="d-flex justify-content-center">
-                    <button type="button" className="btn btn-sm btn-outline-primary me-1 my-1 text-truncate" data-bs-toggle ="modal" data-bs-target={`#report-modal-${id}`}>Report</button>
+                    <button type="button" className="btn btn-sm btn-outline-primary me-1 my-1 text-truncate" data-bs-toggle ="modal" data-bs-target={`#nursing-modal-${id}`}>Report</button>
                     <button type="button" className="btn btn-sm btn-outline-secondary me-1 my-1 text-truncate" data-bs-toggle ="modal" data-bs-target={`#treatment-modal-${id}`}>Treatment Plan</button>
                     <div className="hidden">
                         <button type="button" className="btn btn-sm btn-outline-secondary me-1 my-1 text-truncate" data-bs-toggle ="modal" data-bs-target={`#analyse-modal-${id}`}>Analyse Treatment</button>
@@ -21,9 +21,9 @@ export default function Controls({id, name, role}){
                         </div>
 
                     </div>
-                    <Report role={role} id={id} name={name}/>
-                    <Discharge id={id} name={name} />
-                    <Treatment role={role} id={id} name={name}/>
+                    <Report role={role} id={id} name={name} user_id={user_id}/>
+                    <Discharge role={role} id={id} name={name} user_id={user_id}/>
+                    <Treatment role={role} id={id} name={name} user_id={user_id}/>
                     <Analyse id={id} name={name}/>
                 </div>
     );

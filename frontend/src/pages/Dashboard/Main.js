@@ -9,7 +9,7 @@ export default function Main({user}){
         <div className="container-fluid flex-grow-1">
             <div className="row h-100">
                 <Sidenav setNav={setNav} role={user.role}/>
-                <Main_window nav={nav} role={user.role}/>
+                <Main_window nav={nav} role={user.role} user_id={user.id}/>
             </div>
         </div>
     );
