@@ -1,4 +1,4 @@
-import post from '../../../../modules/post';
+import post from './post';
 import toast from 'react-hot-toast';
 const sendForm = async (url, form, setForm, setLoading, showToast = true)=>{
     if(setLoading) setLoading(true);

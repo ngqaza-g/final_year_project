@@ -1,10 +1,8 @@
 import React from 'react';
+import Form from './Report/Form';
 import Analyse from './Analyse';
-import Report from './Report';
-import Treatment from './Treatment';
-import Discharge from './Discharge';
 
-export default function Controls({id, name, role, user_id}){
+export default function Controls({id}){
     return(
                     <div className="d-flex justify-content-center">
                     <button type="button" className="btn btn-sm btn-outline-primary me-1 my-1 text-truncate" data-bs-toggle ="modal" data-bs-target={`#nursing-modal-${id}`}>Report</button>
@@ -21,10 +19,22 @@ export default function Controls({id, name, role, user_id}){
                         </div>
 
                     </div>
-                    <Report role={role} id={id} name={name} user_id={user_id}/>
-                    <Discharge role={role} id={id} name={name} user_id={user_id}/>
-                    <Treatment role={role} id={id} name={name} user_id={user_id}/>
-                    <Analyse id={id} name={name}/>
+                    <Form 
+                        id={id}
+                        type="nursing" 
+                    />
+
+                    <Form 
+                        id={id}
+                        type="treatment" 
+                    />
+
+                    <Form 
+                        id={id}
+                        type="discharge" 
+                    />
+
+                    <Analyse id={id} />
                 </div>
     );
 }

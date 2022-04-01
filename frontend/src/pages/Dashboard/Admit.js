@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { ToastContainer } from 'react-toastify';
 import RadioInput from './components/Admit_components/RadioInput';
 import TextareaInput from './components/Admit_components/TextareaInput';
 import TextInput from './components/Admit_components/TextInput';
 import SelectInput from './components/Admit_components/SelectInput';
-import sendForm from './components/Form_componets/sendForm';
-import updateForm from './components/Form_componets/updateForm';
+import sendForm from '../../modules/sendForm';
+import updateForm from '../../modules/updateForm';
 
 export default function Admit(){
   const [loading, setLoading] = useState(false);
@@ -48,7 +47,6 @@ export default function Admit(){
 
   return(
     <form onSubmit={submit} className="container-fluid">
-    <ToastContainer />
     <div className="h1 text-center">Admit Patient</div>
     <div className="form">
     <div className="h4 mb-2">Patient Information</div>
@@ -59,6 +57,13 @@ export default function Admit(){
         value={form.name} 
     />
     
+    <TextInput 
+        label="Age:" 
+        name ="age" 
+        onChange={onChange} 
+        value={form.age} 
+    />
+
     <TextInput 
         label="National ID:" 
         name ="national_id" 

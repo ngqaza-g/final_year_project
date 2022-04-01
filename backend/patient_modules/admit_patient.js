@@ -1,9 +1,12 @@
 const Patient = require('../models/Patient');
 
 const admit_patient = async (req, res)=>{
+    const socket = req.app.get('socket');
+    const users = req.app.get('users');
     const {
         name,
         national_id,
+        age,
         address,
         phone_number,
         gender,
@@ -16,6 +19,7 @@ const admit_patient = async (req, res)=>{
     if(!patient){
         const newPatient = new Patient({
             name : name,
+            age : age,
             national_id: national_id,
             address : address,
             phone_number : phone_number,
@@ -26,6 +30,19 @@ const admit_patient = async (req, res)=>{
         });
     
         await newPatient.save();
+        const newPatientData = await Patient.findOne({national_id : national_id}).select({
+            name : 1, 
+            gender: 1,
+            age: 1
+        });
+
+        users.forEach(user=>{
+            const { doctor, day_nurse, night_nurse} = care_givers;
+            if(user.user_id === doctor || user.user_id === day_nurse || user.user_id === night_nurse){
+                socket.to(user.socket_id).emit('notification', 'Patient Admited');
+                socket.to(user.socket_id).emit('admit_patient', newPatientData);
+            }
+        })
         res.json({msg: "Patient Admited"});
 
     }else{

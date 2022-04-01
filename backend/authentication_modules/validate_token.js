@@ -14,7 +14,7 @@ const validate_token = async (req, res, next)=>{
                 const token_data = await Token.findOne({token : hash_token});
                 if(token_data){
                     const user = await  User.findOne({_id : token_data.user_id});
-                    if(Object.keys(user).length !== 0){
+                    if(user){
                         req.user = user;
                         next();
                     }else{

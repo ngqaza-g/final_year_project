@@ -1,47 +1,37 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Controls from './controls/Controls';
 import Readings from './vitals/Readings';
 import Ecg from './vitals/Ecg';
+import capitaliseFirstLetter from '../../../modules/capitaliseFirstLetter'
 
 
 
-export default function Monitor({name, age, sex, id, role, user_id}){
+export default function Monitor({ id }){
 
-
+    const [patient] = useSelector(state => state.patients.filter(patient => patient._id === id));
+    const { name,  gender, age } = patient;
+    
     return (
-        //  <!-- Monitor --> 
             <div className="col-lg-6 p-2 my-2 border border-dark monitor">
             <div className="row">
                 <div className="col-sm-9 d-flex flex-column h-100">
 
-                    {/* <!-- Monitor heading --> */}
+            
                     <div className="top d-flex justify-content-between">
                         <div className="bed-number d-flex justify-content-center align-items-center bg-success text-white">1</div>
                         <div className="patient-info d-flex justify-content-between">
                             <p className="lead me-2">{name}</p> 
                             <p className="lead me-2">{age}</p> 
-                            <p className="lead me-2">{sex}</p>
+                            <p className="lead me-2">{capitaliseFirstLetter(gender)}</p>
                         </div>
-                    </div>
-                    {/* <!-- End of monitor heading --> */}
-
-                    {/* <!-- Ecg waveform --> */}
-                        <Ecg />
-                    {/* <!-- End of Ecg waveform --> */}
+                    </div>    
+                    <Ecg id={id} />
                 </div>
-
-                {/* <!-- Vitals Values --> */}
-                    <Readings />
-
-                {/* <!-- End of Vitals Values --> */}
+                <Readings id={id} />
             </div>
-
-            {/* <!-- controls -->  */}
-                <Controls role={role} id={id} name={name} user_id={user_id}/>
-            {/* <!-- End of controls -->  */}
-
+            <Controls id={id} />
         </div>
-    //  <!-- End of Monitor -->
     );
 
 }

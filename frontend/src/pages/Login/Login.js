@@ -1,52 +1,54 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import Cookies from 'universal-cookie';
 import './Login.css';
 import logo from './logo.png';
 import Loading from '../Loading/Loading';
-import updateForm from "../Dashboard/components/Form_componets/updateForm";
-import sendForm from "../Dashboard/components/Form_componets/sendForm";
-import toast, { Toaster } from "react-hot-toast";
+import updateForm from "../../modules/updateForm";
+import login from "../../modules/login";
+import { useDispatch } from "react-redux";
 
-const Login = ({ setLoginToken, setUser })=>{
+
+const Login = ()=>{
 
     const [loading, setLoading] = useState(false);
 
     const [credentials, setCredentials] = useState({});
 
     const navigate = useNavigate();
-    const cookie = new Cookies(); 
+    const dispatch = useDispatch();
+    // const cookie = new Cookies(); 
 
     const onChange = (event)=>{
         const {name, value} = event.target;
-        updateForm(name,value, setCredentials);
+        updateForm(name, value, setCredentials);
     }
 
-    const authenticate = async (credentials, destination)=>{
-        const { status, data } = await sendForm('http://localhost:5000/login', credentials, setCredentials, setLoading);
+    // const authenticate = async (credentials, destination)=>{
+    //     const { status, data } = await sendForm('http://localhost:5000/login', credentials, setCredentials, setLoading);
 
-        if(status === 200){
-            const {login_token, user} = data;
-            cookie.set('login_token', login_token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 7))});
-            cookie.set('login_token_', "1" ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 2))});
-            setLoginToken(login_token);
-            setUser(user);
-            navigate(destination);
-        }
+    //     if(status === 200){
+    //         const {login_token, user} = data;
+    //         cookie.set('login_token', login_token ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 7))});
+    //         cookie.set('login_token_', "1" ,{path : '/', expires : new Date((Date.now() + 1000 * 60 * 60 * 24 * 2))});
+    //         setLoginToken(login_token);
+    //         setUser(user);
+    //         navigate(destination);
+    //     }
 
-    }
+    // }
 
 
 
     const onSubmit = (e)=>{
         e.preventDefault();
-        authenticate(credentials, '/dashboard');
+        login(credentials, setCredentials, setLoading, navigate, dispatch);
+        // authenticate(credentials, '/dashboard');
     }
 
     if(!loading){
         return (
             <div>
-            <Toaster />
+            {/* <Toaster /> */}
             <div className="container login-container">
             <div className="header mt-5">
                 <h2 className="text-primary">Bulawayo General Hospital</h2>

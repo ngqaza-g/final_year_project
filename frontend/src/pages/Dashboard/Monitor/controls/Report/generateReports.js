@@ -2,7 +2,7 @@ import React from 'react';
 
 const generateReports =  (reports, type)=>{
     let new_reports = [];
-    if(type === "nursing"){
+    if(type === "nursing_reports"){
         new_reports = reports.map(report =>(
             {
                 id: report._id,
@@ -19,7 +19,7 @@ const generateReports =  (reports, type)=>{
         ))
     }
 
-    if(type === "treatment"){
+    if(type === "treatments"){
         new_reports =  reports.map(report =>(
             {
                 id: report._id,

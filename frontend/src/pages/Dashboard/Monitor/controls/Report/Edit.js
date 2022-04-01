@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import updateForm from '../../../components/Form_componets/updateForm';
-import sendForm from '../../../components/Form_componets/sendForm';
+import updateForm from '../../../../../modules/updateForm'; 
+import sendForm from '../../../../../modules/sendForm';
 import NursingReportForm from './NursingReportForm';
 import TreatmentPlanForm  from './TreatmentPlanForm';
 import DischangePlanForm  from './DischargePlanForm';
+import { useSelector } from 'react-redux';
 
-export default function Edit({ author, type, form_id, setForm_id, patient_id}){
+export default function Edit({ type, form_id, setForm_id, patient_id}){
+    
+    const author = useSelector(state => state.user.id);
     const requests = {
         "nursing" : "report",
         "treatment" : "treatment",

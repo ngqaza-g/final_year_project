@@ -8,6 +8,6 @@ const treatmentPlanSchema = mongoose.Schema({
     date : String
 });
 
-const TreatmentPlan = mongoose.model('discharge_plan', treatmentPlanSchema);
+const TreatmentPlan = mongoose.model('treatment_plan', treatmentPlanSchema);
 
 module.exports = TreatmentPlan;

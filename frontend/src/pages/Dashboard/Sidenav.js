@@ -1,6 +1,10 @@
 import React, {useEffect} from "react";
+import { useSelector } from "react-redux";
 
-export default function Sidenav({setNav, role}){
+export default function Sidenav({setNav}){
+    
+    const role = useSelector( state => state.user.role );
+
     useEffect(()=>{
         const navs = document.querySelectorAll('.side-bar-nav-link');
         navs.forEach(nav => {

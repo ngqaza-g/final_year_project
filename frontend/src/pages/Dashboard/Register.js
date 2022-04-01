@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import sendForm from './components/Form_componets/sendForm';
-import updateForm from './components/Form_componets/updateForm';
+import sendForm from '../../modules/sendForm';
+import updateForm from '../../modules/updateForm';
 import RadioInputs from './components/Register_components/RadioInputs';
 
 export default function Register(){

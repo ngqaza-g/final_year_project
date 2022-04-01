@@ -1,31 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import Cookies from 'universal-cookie';
-import post from "../../modules/post";
+import { useSelector, useDispatch } from "react-redux";
 import ChangePassword from "./ChangePassword";
-import sendForm from "./components/Form_componets/sendForm";
+import capitaliseFirstLetter from '../../modules/capitaliseFirstLetter';
+import logout from '../../modules/logout';
 
-export default function Navbar({setLoginToken, setUser, user}){
-
+export default function Navbar(){
   const navigate = useNavigate();
-  const cookie = new Cookies();
-
-  const logout = async ()=>{
-      
-        const token = cookie.get('login_token');
-        const {status} = await sendForm('http://localhost:5000/logout', {token : token});
-        if(status === 200){
-            cookie.remove('login_token'); // Remove the cookie
-            setLoginToken(undefined); // set the login token to undefined (deleting it))
-            setUser(undefined); // set the user to undefined
-            navigate('/'); // Navigate to the login page
-
-        }
-    }
-
-    const capitaliseFirstLetter = (word)=>{
-        return word.charAt(0).toUpperCase() + word.slice(1);
-    }
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
 
     return (
        
@@ -55,7 +38,7 @@ export default function Navbar({setLoginToken, setUser, user}){
 
                 <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                     <li>
-                        <button onClick={logout} className="dropdown-item">
+                        <button onClick={()=>{logout(navigate, dispatch)}} className="dropdown-item">
                             Signout
                         </button>
                     </li>
@@ -68,7 +51,7 @@ export default function Navbar({setLoginToken, setUser, user}){
                 </ul>
             </div>
         </div>
-        <ChangePassword logout={logout} />
+        <ChangePassword />
     </nav>
     
     );

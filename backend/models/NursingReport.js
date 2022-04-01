@@ -8,10 +8,10 @@ const nursingReportSchema = mongoose.Schema({
     temp : String,
     heart_rate: String,
     nursing_care_plan : String,
-    report: String,
+    nursing_report: String,
     date : String
 });
 
-const NursingReport = mongoose.model('discharge_plan', nursingReportSchema);
+const NursingReport = mongoose.model('nursing_report', nursingReportSchema);
 
 module.exports = NursingReport;

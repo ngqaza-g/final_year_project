@@ -6,12 +6,12 @@ import Global from './Global';
 import Patients from './Patients';
 import Register from './Register';
 
-export default function Main_Window({nav, role, user_id}){
+export default function Main_Window({nav}){
 
     const getComponent = (comp)=>{
         switch(comp){
             case "dashboard":
-                return <Display key = {comp} role={role} user_id={user_id}/>
+                return <Display key = {comp} />
                 break;
 
             case "patients":

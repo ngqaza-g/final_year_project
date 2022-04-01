@@ -1,7 +1,9 @@
 const Token = require('../models/Token');
 const User = require('../models/User');
+const successful_login = require('./successful_login');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+
 
 const login = async (req, res)=>{
 
@@ -20,17 +22,16 @@ const login = async (req, res)=>{
                     user_id : user._id,
                     expire : expire
                 });
-            
-    
+
                 await newToken.save();
                 const userData = {
+                    _id : user._id,
                     name : user.name,
                     email : user.email,
                     username : user.username,
                     role : user.role
                 }
-                
-                res.json({msg : "Logged in", user : userData, login_token : token});
+                successful_login(res, userData, token);
             }else{
                 res.status(404).json({msg : "Wrong password"});
             }
