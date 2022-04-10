@@ -38,7 +38,7 @@ const admit_patient = async (req, res)=>{
 
         users.forEach(user=>{
             const { doctor, day_nurse, night_nurse} = care_givers;
-            if(user.user_id === doctor || user.user_id === day_nurse || user.user_id === night_nurse){
+            if(user.user_id === doctor || user.user_id === day_nurse || user.user_id === night_nurse || user.role.toLowerCase() === 'admin'){
                 socket.to(user.socket_id).emit('notification', 'Patient Admited');
                 socket.to(user.socket_id).emit('admit_patient', newPatientData);
             }

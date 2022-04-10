@@ -18,12 +18,12 @@ export default function Monitor({ id }){
                 <div className="col-sm-9 d-flex flex-column h-100">
 
             
-                    <div className="top d-flex justify-content-between">
+                    <div className="d-flex justify-content-between">
                         <div className="bed-number d-flex justify-content-center align-items-center bg-success text-white">1</div>
                         <div className="patient-info d-flex justify-content-between">
-                            <p className="lead me-2">{name}</p> 
-                            <p className="lead me-2">{age}</p> 
-                            <p className="lead me-2">{capitaliseFirstLetter(gender)}</p>
+                            <div className="lead me-2">{name}</div> 
+                            <div className="lead me-2">{age}</div> 
+                            <div className="lead me-2">{capitaliseFirstLetter(gender)}</div>
                         </div>
                     </div>    
                     <Ecg id={id} />

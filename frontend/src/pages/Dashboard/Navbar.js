@@ -10,6 +10,20 @@ export default function Navbar(){
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
+
+    const toggleSidenav = ()=>{
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('active_sidebar');
+        // window.addEventListener('click', ()=>{
+        //     sidebar.classList.forEach(item=>{
+        //         if(item === 'active_sidebar') {
+        //             sidebar.classList.remove('active_sidebar');
+        //             window.removeEventListener('click', ()=>{});
+        //         }
+        //     });
+        // });
+
+    }
     return (
        
     //   <!-- Navbar -->
@@ -22,8 +36,12 @@ export default function Navbar(){
     //         change password -> modal
     //  -->
 
-    <nav className="navbar navbar-dark bg-dark">
+
+    <nav className="navbar navbar-dark bg-dark sticky-top navbar-expand-sm">
         <div className="container-fluid navbar-elements">
+            <button className="navbar-toggler" onClick={toggleSidenav}>
+                <span className="navbar-toggler-icon"></span>
+            </button>
             <a href="/" className="navbar-brand ms-3">Bulawayo General</a>
 
             {/* <!-- Nav dropdown menu --> */}

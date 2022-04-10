@@ -1,5 +1,8 @@
 html, body, #root{
-    height: 100%;
+    min-height: 100vh;
+}
+.body{
+    min-height: 100vh;
 }
 
 .dropdown-toggle::after{
@@ -20,6 +23,23 @@ html, body, #root{
     border-radius: 50%;
 }
 
+.sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 56px 0 0; /* Height of navbar */
+}
+
+.sidebar-sticky{
+    position: relative;
+    top: 0;
+    height: calc(100vh - 56px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
 
 
 .sidebar, footer{
@@ -45,6 +65,15 @@ html, body, #root{
     .monitor{
         margin: auto;
     }
+    .sidebar{
+        left: -100%;
+        width : 20%;
+        transition: left ease-in 1s;
+    }
+
+    .active_sidebar{
+        left: 0;
+    }
 
     .value .units, .more{
         display: inline;
@@ -56,6 +85,10 @@ html, body, #root{
 
     .controls{
         justify-content: space-around;
+    }
+
+    .ecg{
+        width: 100%;
     }
 
     .nav-link{

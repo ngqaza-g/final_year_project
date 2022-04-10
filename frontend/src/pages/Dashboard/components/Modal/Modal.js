@@ -7,7 +7,7 @@ export default function Modal({title ,body, id, save, view, toggleView, form_id,
             <div className="modal-content">
                 <div className="modal-header">
                     <h5 className="modal-title text-truncate">{title}</h5>
-                    <button className="btn-close" data-bs-dismiss="modal"></button>
+                    <button className="btn-close" id= {`close_${form_id}`} data-bs-dismiss="modal"></button>
                 </div>
                 <div className="modal-body">
                     {body}

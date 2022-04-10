@@ -8,7 +8,9 @@ const changePassword = async(passwords, setPasswords, setLoading, navigate, disp
         const token = cookies.get('login_token');
         if((passwords.current_password !== passwords.new_password) && (passwords.new_password === passwords.repeat_new_password)){
                 const { status } = await sendForm('http://localhost:5000/change_password', {token: token, ...passwords}, setPasswords, setLoading);
-                document.querySelector('.btn-close').click();
+                const close_btn = document.querySelector('.btn-close');
+                console.log(close_btn);
+                close_btn.click();
                 if(status === 200){
                     logout(navigate, dispatch);
                 }

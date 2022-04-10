@@ -42,7 +42,7 @@ export default function Main_Window({nav}){
     }
 
     return (
-        <div className = "col-sm-11 col-lg-10 p-3">
+        <div className = "col-sm-11 col-lg-10 ms-sm-auto  p-3">
             {getComponent(nav)}
         </div>
     );

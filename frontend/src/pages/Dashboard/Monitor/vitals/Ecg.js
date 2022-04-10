@@ -1,85 +1,81 @@
-import React from 'react';
-import Chart from 'react-apexcharts';
+import React, {useState, useEffect} from 'react';
+import {Chart as ChartJS, LineElement, PointElement, LinearScale} from 'chart.js';
+import 'chartjs-adapter-luxon';
+import ChartStreaming from 'chartjs-plugin-streaming';
+import { Line } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
 
-export default function Ecg(){
-        // const [series, setSeries] = useState([]);
 
-    // setSeries([{
-    //     name: "Desktops",
-    //     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-    // }]);
+export default function Ecg({ bed_number}){
+  // const get_data = ()=>{
+  //   const data = [];
+  //   for(let i = 0; i <= 50; i++){
+  //       data[i] = Math.random() * 10; 
+  //   }
 
-    const series = [{
+  //   return data;
+  // }
 
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+  let update = useSelector(state => state.ecg_temp);
+
+  let data_ = [];
+  useEffect(()=>{
+    data_ = [...data_ , update["ecg"]];
+  }, [update])
+
+  ChartJS.register(ChartStreaming, LineElement, PointElement, LinearScale);
+    const data = {
+      datasets : [{
+        data: data_,
+        radius: 0,
+        borderColor: "#00000"
+      }]
     }
-    ]
 
     const options = {
-        chart: {
-        height: '100%',
-        type: 'line',
-        zoom: {
-          enabled: false
-        },
-        toolbar:{
-            show : false
-        },
-        animations: {
-            enabled: true,
-            easing: 'linear',
-            dynamicAnimation: {
-              speed: 1000
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales:{
+        x: {
+            type: 'realtime',
+            realtime:{
+                duration: 10000,
+                frameRate: 5,
+                // refresh : 1000,
+                // onRefresh: (chart)=>{
+                //     chart.data.datasets.forEach(dataset =>{
+
+                //         let now = Date.now();
+
+                //         const data = get_data();
+                //         data.forEach((value, index)=>{
+                //             dataset.data.push({
+                //                 x : now + index * 20,
+                //                 y: value
+                //             });
+                //         })
+                //         // dataset.data.push({
+                //         //     x: Date.now(),
+                //         //     y: Math.random() * 10
+                //         //     // y: 0
+
+                //         // })
+                //     })
+                //   }
             }
         }
-      },
-
-        tooltip:{
-            enabled : false
-        },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-
-      grid: {
-    //     row: {
-    //       colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-    //       opacity: 0.5
-    //     },
-    //     column:{
-    //         colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-    //         opacity: 0.5
-    //     }
-    //   },
-
-      yaxis:{
-          max: 100,
-        lines:{
-            show: true
-        }
-      },
-      xaxis: {
-          labels:{
-              show: false
-          },
-          lines:{
-              show: true
-          }
-      }
-      }
-      };
+      } 
+    }
 
     return (
-        <div className="ecg flex-grow-1 d-none d-sm-block">
-            <Chart
-                options = {options}
-                series = {series}
-                type = {"line"}
-                height = "100%"
-            />
+        <div className="ecg flex-grow-1 py-2">
+          <Line
+            data = {data}
+            options = {options}
+          />
         </div>
     );
 }

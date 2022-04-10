@@ -25,9 +25,11 @@ export default function Edit({ type, form_id, setForm_id, patient_id}){
         updateForm(name, value, setForm);
     }
     
-    const submit = (e)=>{
+    const submit = async (e)=>{
         e.preventDefault();
-        sendForm(`http://localhost:5000/patients/${requests[type]}`,form , setForm);
+        const close_btn = document.querySelector(`#close_${form_id}`);
+        close_btn.click();
+        const { status } = await sendForm(`http://localhost:5000/patients/${requests[type]}`,form , setForm);
     }
 
     const forms = {

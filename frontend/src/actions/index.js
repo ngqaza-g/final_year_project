@@ -78,3 +78,29 @@ export const reset_reports = ()=>{
         type: 'RESET_REPORTS',
     }
 }
+
+export const set_vitals = (vitals)=>{
+    return {
+        type: 'SET_VITALS',
+        payload: vitals
+    }
+}
+
+export const reset_vitals = ()=>{
+    return {
+        type: 'RESET_VITALS'
+    }
+}
+
+export const set_ecg_temp = (payload)=>{
+    return {
+        type: 'SET_ECG_TEMP',
+        payload: payload
+    }
+}
+
+export const reset_ecg_temp = ()=>{
+    return {
+        type: 'RESET_ECG_TEMP'
+    }
+}

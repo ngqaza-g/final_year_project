@@ -6,6 +6,11 @@ export default function Sidenav({setNav}){
     const role = useSelector( state => state.user.role );
 
     useEffect(()=>{
+        const sidebar = document.querySelector('.sidebar');
+      
+
+        
+
         const navs = document.querySelectorAll('.side-bar-nav-link');
         navs.forEach(nav => {
             nav.addEventListener('click', ()=>{
@@ -36,7 +41,7 @@ export default function Sidenav({setNav}){
     //     Global Settings
     //  -->
 
-     <div className="bg-dark d-none d-sm-flex flex-column text-white col-sm-1 col-lg-2 h-100  sidebar">
+     <div className="bg-dark d-flex flex-column text-white col-sm-1 col-lg-2 h-100  sidebar">
 
         <div className="d-flex flex-column align-items-center">
             <ul className="nav nav-pills flex-column mt-4">

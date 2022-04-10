@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import socket from '../socket';
-import { update_reports, discharge_patient, admit_patient } from '../../actions';
+import { update_reports, discharge_patient, admit_patient, set_vitals, set_ecg_temp } from '../../actions';
 
 const listeners = (dispatch) =>{
 
@@ -22,6 +22,14 @@ const listeners = (dispatch) =>{
 
     socket.on('discharge_patient', (patient)=>{
         dispatch(discharge_patient(patient));
+    })
+
+    socket.on('vitals', (vitals)=>{
+        dispatch(set_vitals(vitals));
+    })
+
+    socket.on('ecg_temp', (payload)=>{
+        dispatch(set_ecg_temp(payload))
     })
 
 }
